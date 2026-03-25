@@ -38,7 +38,7 @@ export default function RegisterPage() {
           <input type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} required />
         </label>
         <label>كلمة المرور
-          <input type="password" value={form.password} onChange={e => setForm({...form, password: e.target.value})} required minLength={6} />
+          <input type="password" value={form.password} onChange={e => setForm({...form, password: e.target.value})} required minLength={8} />
         </label>
         <label>نوع الحساب
           <select value={form.role} onChange={e => setForm({...form, role: e.target.value})}>
