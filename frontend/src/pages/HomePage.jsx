@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function HomePage() {
@@ -9,7 +9,7 @@ export default function HomePage() {
   const { user } = useAuth();
 
   useEffect(() => {
-    axios.get('http://localhost:3001/api/conferences')
+    api.get('/api/conferences')
       .then(res => setConferences(res.data))
       .catch(console.error)
       .finally(() => setLoading(false));

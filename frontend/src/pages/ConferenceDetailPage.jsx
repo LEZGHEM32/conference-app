@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function ConferenceDetailPage() {
@@ -14,13 +14,13 @@ export default function ConferenceDetailPage() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/conferences/${id}`)
+    api.get(`/api/conferences/${id}`)
       .then(res => setConference(res.data))
       .catch(() => navigate('/'))
       .finally(() => setLoading(false));
 
     if (user?.role === 'participant' && token) {
-      axios.get('http://localhost:3001/api/registrations/my', {
+      api.get('/api/registrations/my', {
         headers: { Authorization: `Bearer ${token}` }
       }).then(res => {
         setRegistered(res.data.some(r => r.conference_id === parseInt(id)));
@@ -32,7 +32,7 @@ export default function ConferenceDetailPage() {
     setActionLoading(true);
     setMessage('');
     try {
-      await axios.post('http://localhost:3001/api/registrations', 
+      await api.post('/api/registrations', 
         { conferenceId: parseInt(id) },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -50,7 +50,7 @@ export default function ConferenceDetailPage() {
     setActionLoading(true);
     setMessage('');
     try {
-      await axios.delete(`http://localhost:3001/api/registrations/${id}`,
+      await api.delete(`/api/registrations/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setRegistered(false);

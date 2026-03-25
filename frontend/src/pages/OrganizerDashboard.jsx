@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function OrganizerDashboard() {
@@ -14,7 +14,7 @@ export default function OrganizerDashboard() {
       navigate('/');
       return;
     }
-    axios.get('http://localhost:3001/api/conferences/my', {
+    api.get('/api/conferences/my', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => setConferences(res.data))
@@ -25,7 +25,7 @@ export default function OrganizerDashboard() {
   const handleDelete = async (id) => {
     if (!confirm('هل أنت متأكد من حذف هذا الملتقى؟')) return;
     try {
-      await axios.delete(`http://localhost:3001/api/conferences/${id}`, {
+      await api.delete(`/api/conferences/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setConferences(prev => prev.filter(c => c.id !== id));

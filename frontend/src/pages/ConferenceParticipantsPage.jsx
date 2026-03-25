@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function ConferenceParticipantsPage() {
@@ -17,8 +17,8 @@ export default function ConferenceParticipantsPage() {
       return;
     }
     Promise.all([
-      axios.get(`http://localhost:3001/api/conferences/${id}`),
-      axios.get(`http://localhost:3001/api/registrations/conference/${id}`, {
+      api.get(`/api/conferences/${id}`),
+      api.get(`/api/registrations/conference/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
     ])
@@ -32,7 +32,7 @@ export default function ConferenceParticipantsPage() {
 
   const handleStatusChange = async (regId, newStatus) => {
     try {
-      await axios.put(`http://localhost:3001/api/registrations/${regId}/status`,
+      await api.put(`/api/registrations/${regId}/status`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );

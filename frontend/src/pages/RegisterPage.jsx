@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function RegisterPage() {
@@ -17,7 +17,7 @@ export default function RegisterPage() {
     setError('');
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:3001/api/auth/register', form);
+      const res = await api.post('/api/auth/register', form);
       login(res.data.token, res.data.user);
       if (res.data.user.role === 'organizer') {
         navigate('/organizer');

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function CreateConferencePage() {
@@ -22,7 +22,7 @@ export default function CreateConferencePage() {
     setError('');
     setLoading(true);
     try {
-      await axios.post('http://localhost:3001/api/conferences',
+      await api.post('/api/conferences',
         { ...form, capacity: parseInt(form.capacity) },
         { headers: { Authorization: `Bearer ${token}` } }
       );

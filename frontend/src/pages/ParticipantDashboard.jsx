@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function ParticipantDashboard() {
@@ -14,7 +14,7 @@ export default function ParticipantDashboard() {
       navigate('/');
       return;
     }
-    axios.get('http://localhost:3001/api/registrations/my', {
+    api.get('/api/registrations/my', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => setRegistrations(res.data))
@@ -25,7 +25,7 @@ export default function ParticipantDashboard() {
   const handleCancel = async (conferenceId) => {
     if (!confirm('هل تريد إلغاء تسجيلك في هذا الملتقى؟')) return;
     try {
-      await axios.delete(`http://localhost:3001/api/registrations/${conferenceId}`, {
+      await api.delete(`/api/registrations/${conferenceId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setRegistrations(prev => prev.filter(r => r.conference_id !== conferenceId));

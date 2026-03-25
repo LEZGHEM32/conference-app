@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function EditConferencePage() {
@@ -17,7 +17,7 @@ export default function EditConferencePage() {
       navigate('/');
       return;
     }
-    axios.get(`http://localhost:3001/api/conferences/${id}`)
+    api.get(`/api/conferences/${id}`)
       .then(res => {
         const conf = res.data;
         if (conf.organizer_id !== user.id) {
@@ -43,7 +43,7 @@ export default function EditConferencePage() {
     setError('');
     setLoading(true);
     try {
-      await axios.put(`http://localhost:3001/api/conferences/${id}`,
+      await api.put(`/api/conferences/${id}`,
         { ...form, capacity: parseInt(form.capacity) },
         { headers: { Authorization: `Bearer ${token}` } }
       );
