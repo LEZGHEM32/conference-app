@@ -1,0 +1,27 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1a56db;
+  color: white;
+  padding: 0.75rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.brand { font-size: 1.2rem; font-weight: bold; }
+.links { display: flex; align-items: center; gap: 1rem; }
+.links a { color: white; text-decoration: none; font-weight: 500; }
+.links a:hover { text-decoration: underline; }
+.greeting { opacity: 0.9; font-size: 0.9rem; }
+.logoutBtn {
+  background: rgba(255,255,255,0.2);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.4);
+  padding: 0.35rem 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.logoutBtn:hover { background: rgba(255,255,255,0.3); }

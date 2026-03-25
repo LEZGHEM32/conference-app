@@ -1,0 +1,64 @@
+.dashboard { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+.header { margin-bottom: 2rem; }
+.header h1 { font-size: 1.8rem; color: #1a56db; }
+.subtitle { color: #555; margin-top: 0.35rem; }
+.error { background: #fee2e2; color: #dc2626; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+.loading { text-align: center; padding: 3rem; color: #555; }
+.empty { text-align: center; padding: 2rem; color: #888; font-size: 1rem; }
+.addBtn {
+  padding: 0.7rem 1.5rem;
+  background: #1a56db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+.addBtn:hover { background: #1648c0; }
+.section { margin-top: 1.5rem; }
+.section h2 { font-size: 1.2rem; margin-bottom: 1rem; color: #333; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; }
+.confCard {
+  background: white;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.confCard h3 { color: #1a56db; font-size: 1.05rem; }
+.confCard p { font-size: 0.9rem; color: #555; }
+.desc { color: #888 !important; font-style: italic; }
+.cardActions { display: flex; gap: 0.75rem; margin-top: 0.75rem; }
+.editBtn { padding: 0.4rem 1rem; background: #f59e0b; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
+.editBtn:hover { background: #d97706; }
+.deleteBtn { padding: 0.4rem 1rem; background: #dc2626; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
+.deleteBtn:hover { background: #b91c1c; }
+.formCard { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+.formCard h2 { margin-bottom: 1rem; color: #333; }
+.conferenceForm { display: flex; flex-direction: column; gap: 1rem; }
+.conferenceForm label { display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.95rem; font-weight: 500; }
+.conferenceForm input, .conferenceForm textarea, .conferenceForm select {
+  padding: 0.6rem 0.85rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  font-family: inherit;
+}
+.conferenceForm input:focus, .conferenceForm textarea:focus { border-color: #1a56db; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.formActions { display: flex; gap: 1rem; }
+.formActions button { flex: 1; padding: 0.7rem; background: #1a56db; color: white; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; font-weight: 600; }
+.formActions button:hover { background: #1648c0; }
+.cancelBtn { background: #6b7280 !important; }
+.cancelBtn:hover { background: #4b5563 !important; }
+.controls { display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.tabs { display: flex; gap: 0.5rem; }
+.tab { padding: 0.5rem 1rem; background: white; border: 2px solid #d1d5db; border-radius: 8px; cursor: pointer; font-size: 0.9rem; }
+.activeTab { padding: 0.5rem 1rem; background: #1a56db; color: white; border: 2px solid #1a56db; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600; }
+.search { padding: 0.5rem 0.85rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 0.95rem; outline: none; min-width: 200px; }
+.search:focus { border-color: #1a56db; }
