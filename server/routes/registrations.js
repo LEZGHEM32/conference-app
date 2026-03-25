@@ -26,17 +26,21 @@ router.get('/check/:conferenceId', authenticate, requireRole('participant'), (re
 
 // Register for a conference (participants only)
 router.post('/:conferenceId', authenticate, requireRole('participant'), (req, res) => {
-  const conf = db.prepare('SELECT * FROM conferences WHERE id = ?').get(req.params.conferenceId);
-  if (!conf) return res.status(404).json({ message: 'Conference not found' });
-  const count = db.prepare('SELECT COUNT(*) as c FROM registrations WHERE conference_id = ?').get(conf.id).c;
-  if (count >= conf.max_participants) {
-    return res.status(409).json({ message: 'Conference is full' });
-  }
-  try {
+  const registerTx = db.transaction(() => {
+    const conf = db.prepare('SELECT * FROM conferences WHERE id = ?').get(req.params.conferenceId);
+    if (!conf) return { status: 404, body: { message: 'Conference not found' } };
+    const count = db.prepare('SELECT COUNT(*) as c FROM registrations WHERE conference_id = ?').get(conf.id).c;
+    if (count >= conf.max_participants) {
+      return { status: 409, body: { message: 'Conference is full' } };
+    }
     db.prepare('INSERT INTO registrations (conference_id, participant_id) VALUES (?, ?)').run(conf.id, req.user.id);
-    res.status(201).json({ message: 'Registered successfully' });
+    return { status: 201, body: { message: 'Registered successfully' } };
+  });
+  try {
+    const result = registerTx();
+    return res.status(result.status).json(result.body);
   } catch (err) {
-    if (err.message && err.message.includes('UNIQUE')) {
+    if (err.code === 'SQLITE_CONSTRAINT_UNIQUE' || err.code === 'SQLITE_CONSTRAINT') {
       return res.status(409).json({ message: 'Already registered' });
     }
     res.status(500).json({ message: 'Server error' });

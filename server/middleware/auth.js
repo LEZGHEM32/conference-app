@@ -1,6 +1,9 @@
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'conference_secret_key';
+if (process.env.NODE_ENV === 'production' && !process.env.JWT_SECRET) {
+  throw new Error('JWT_SECRET environment variable must be set in production');
+}
+const JWT_SECRET = process.env.JWT_SECRET || 'conference_secret_key_dev';
 
 function authenticate(req, res, next) {
   const authHeader = req.headers.authorization;

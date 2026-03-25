@@ -21,7 +21,7 @@ router.post('/register', async (req, res) => {
     const token = jwt.sign({ id: result.lastInsertRowid, name, email, role }, JWT_SECRET, { expiresIn: '7d' });
     res.status(201).json({ token, user: { id: result.lastInsertRowid, name, email, role } });
   } catch (err) {
-    if (err.message && err.message.includes('UNIQUE')) {
+    if (err.code === 'SQLITE_CONSTRAINT_UNIQUE' || err.code === 'SQLITE_CONSTRAINT') {
       return res.status(409).json({ message: 'Email already in use' });
     }
     res.status(500).json({ message: 'Server error' });
