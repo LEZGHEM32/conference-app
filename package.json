@@ -1,0 +1,7 @@
+{
+  "name": "conference-app",
+  "scripts": {
+    "start:backend": "cd backend && node server.js",
+    "start:frontend": "cd frontend && npm run dev"
+  }
+}
